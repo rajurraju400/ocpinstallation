@@ -211,4 +211,11 @@ Name:	bastion.tnc.bootcamp.lab
 Address: 192.168.125.10
 
 venkatapathirajr@M-J00JD2MD27 ocpinstallation %
+venkatapathirajr@M-J00JD2MD27 ocpinstallation % nslookup 192.168.125.10          
+Server:		192.168.0.125
+Address:	192.168.0.125#53
+
+10.125.168.192.in-addr.arpa	name = bastion.tnc.bootcamp.lab.
+
+venkatapathirajr@M-J00JD2MD27 ocpinstallation % 
 ```
