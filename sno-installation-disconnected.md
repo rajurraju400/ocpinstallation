@@ -25,9 +25,9 @@ Graphics Card: Nvidia Quadro K620 2GB DDR3 (DVI, DisplayPort)
 Operating System: Fedora Workstation 40
 ```
 
-#### Disk and File system 
+## Disk and File system 
 
-```root@ocphypervisor:/home/raj# pvs
+`root@ocphypervisor:/home/raj# pvs
   PV         VG     Fmt  Attr PSize    PFree  
   /dev/sda   datavg lvm2 a--  <476.94g      0 
   /dev/sdb3  fedora lvm2 a--    <2.73t      0 
@@ -53,10 +53,7 @@ tmpfs                                 126G   16K  126G   1% /tmp
 /dev/sdb2                             974M  368M  539M  41% /boot
 /dev/sdb1                             599M   20M  580M   4% /boot/efi
 tmpfs                                  26G  296K   26G   1% /run/user/1000
-root@ocphypervisor:/home/raj# ```
-
-
-
+root@ocphypervisor:/home/raj# `
 
 ## Architecture Diagram
 
