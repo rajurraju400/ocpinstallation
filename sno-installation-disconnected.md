@@ -60,6 +60,6 @@ root@ocphypervisor:/home/raj# ```
 
 ## Architecture Diagram
 
-![Architecture Diagram](./images/allinone.png)
+![Architecture Diagram](/images/allinone.png)
 
 
