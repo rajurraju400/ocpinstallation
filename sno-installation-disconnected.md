@@ -28,7 +28,8 @@ Operating System: Fedora Workstation 40
 
 ### Disk and File system 
 
-```root@ocphypervisor:/home/raj# pvs
+```
+root@ocphypervisor:/home/raj# pvs
   PV         VG     Fmt  Attr PSize    PFree  
   /dev/sda   datavg lvm2 a--  <476.94g      0 
   /dev/sdb3  fedora lvm2 a--    <2.73t      0 
