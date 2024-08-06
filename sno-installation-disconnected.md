@@ -4,7 +4,7 @@ This lab guide uses a baremetal server to deomonstrate the deployment of Openshi
 
 1) infra readiness
     * Workstation installation and it's configuration
-    * DNS configuration
+    * [DNS configuration](./dns-installation.md)
     * [Architecture Diagram](#architecture-diagram)
 2) OCP installation
     * Installing the mirror-registry
