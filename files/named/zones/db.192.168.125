@@ -12,4 +12,4 @@ $TTL 86400
 100     IN  PTR     api.hub.tnc.bootcamp.lab.
 100     IN  PTR     api-int.hub.tnc.bootcamp.lab.
 100     IN  PTR     apps.hub.tnc.bootcamp.lab.
-1       IN  PTR     quay.tnc.bootcamp.lab.
+11       IN  PTR     quay.tnc.bootcamp.lab.
