@@ -1,0 +1,15 @@
+$TTL 86400
+@   IN  SOA     ns1.tnc.bootcamp.lab. root.tnc.bootcamp.lab. (
+                2024080501  ; Serial
+                3600        ; Refresh
+                1800        ; Retry
+                1209600     ; Expire
+                86400 )     ; Minimum TTL
+;
+@       IN  NS      ns1.tnc.bootcamp.lab.
+@       IN  PTR     tnc.bootcamp.lab.
+
+100     IN  PTR     api.hub.tnc.bootcamp.lab.
+100     IN  PTR     api-int.hub.tnc.bootcamp.lab.
+100     IN  PTR     apps.hub.tnc.bootcamp.lab.
+11       IN  PTR     quay.tnc.bootcamp.lab.
