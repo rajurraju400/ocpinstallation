@@ -95,3 +95,77 @@ root@ocphypervisor:~# ip a
 root@ocphypervisor:~# 
 
 ```
+
+
+## Setting up the APC ups on your workstation
+
+### physical connection
+
+APC UPC comes with console cable, use that to connect your ups with your workstation and install below apc sw to monitor and manage it. 
+
+### apc ups software
+
+```
+yum install apcupsd  -y
+```
+
+### Configure apcupsd
+
+After installing, you need to configure the apcupsd service.
+
+Open the configuration file in a text editor:
+
+```
+vi /etc/apcupsd/apcupsd.conf
+
+```
+
+Look for the following lines and modify them as needed, Ensure that UPSCABLE and UPSTYPE are set to usb and DEVICE is left empty.
+
+```
+UPSCABLE usb
+UPSTYPE usb
+DEVICE
+
+```
+
+### Start and Enable apcupsd Service
+
+Start the apcupsd service and enable it to start at boot:
+
+```
+sudo systemctl start apcupsd
+sudo systemctl enable apcupsd
+
+```
+
+### Check the UPS Status
+
+You can check the status of your UPS with the following command:
+
+```
+apcaccess status
+```
+
+### Log and Notifications (Optional)
+
+If you want to log events or receive notifications for specific UPS events (like power failure, low battery, etc.), you can configure these in `/etc/apcupsd/apccontrol`.
+
+### Trigger shutdown, incase of power outage
+
+You can also write a custom script to monitor the UPS status and trigger a shutdown, Place this script in a cron job or a systemd service that runs regularly to monitor the UPS status and trigger a shutdown if necessary.
+
+```
+vi /root/scripts/apc-emer-breaker.sh
+
+#!/bin/bash
+
+# Check UPS status
+status=$(apcaccess status | grep STATUS | awk '{print $3}')
+
+if [ "$status" == "ONBATT" ]; then
+  # Trigger shutdown
+  sudo shutdown -h now
+fi
+
+```
