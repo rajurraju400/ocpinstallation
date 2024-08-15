@@ -229,6 +229,11 @@ update the your domain names on /etc/named.conf
 [root@bootstap ~]# sed -i 's|tnc.bootcamp.lab|ncp.bootcamp.com|g' /etc/named.conf 
 [root@bootstap ~]# sed -i 's|db.192.168.125|db.135.104.149|g' /etc/named.conf 
 [root@bootstap ~]# 
+
+[root@bootstap zones]# sed -i 's|tnc.bootcamp.lab|ncp.bootcamp.com|g' db.135.104.149 db.ncp.bootcamp.com
+[root@bootstap zones]# sed -i 's|192.168.125|135.104.149|g' db.135.104.149 db.ncp.bootcamp.com
+[root@bootstap zones]# 
+
 ```
 
 #### Allow on firewalld if you have:
@@ -250,11 +255,45 @@ sudo firewall-cmd --reload
 sudo firewall-cmd --list-all
 ```
 
+#### Check Permissions on the Zone Files:
+
+Ensure the reverse zone file and the forward zone file have the correct ownership and permissions:
+
+```
+sudo chown named:named /etc/named/zones/db.ncp.bootcamp.com
+sudo chmod 640 /etc/named/zones/db.ncp.bootcamp.com
+
+sudo chown named:named /etc/named/zones/db.135.104.149
+sudo chmod 640 /etc/named/zones/db.135.104.149
+
+```
 
 #### selinux 
 
 If you're using SELinux (which is enabled by default on RHEL), ensure that it's configured to allow DNS traffic:
 
 ```
-sudo setsebool -P named_write_master_zones 1
+sudo setsebool -P named_write_master_zones 1 # optional
+```
+
+If SELinux is enabled, the context of the files could also be causing permission issues. Check and set the correct SELinux context for the zone files:
+
+```
+sudo restorecon -v /etc/named/zones/db.ncp.bootcamp.com
+sudo restorecon -v /etc/named/zones/db.135.104.149
+```
+
+You can also verify the context:
+
+```
+ls -Z /etc/named/zones/
+
+```
+#### Validate Zone Files:
+
+Run a manual check on the zone files using named-checkzone to ensure there are no syntax errors:
+
+```
+sudo named-checkzone ncp.bootcamp.com /etc/named/zones/db.ncp.bootcamp.com
+sudo named-checkzone 149.104.135.in-addr.arpa /etc/named/zones/db.135.104.149
 ```
