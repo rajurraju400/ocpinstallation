@@ -219,3 +219,42 @@ Address:	192.168.0.125#53
 
 venkatapathirajr@M-J00JD2MD27 ocpinstallation % 
 ```
+
+
+#### Some extra cheats to align with your environment 
+
+update the your domain names on /etc/named.conf 
+
+```
+[root@bootstap ~]# sed -i 's|tnc.bootcamp.lab|ncp.bootcamp.com|g' /etc/named.conf 
+[root@bootstap ~]# sed -i 's|db.192.168.125|db.135.104.149|g' /etc/named.conf 
+[root@bootstap ~]# 
+```
+
+#### Allow on firewalld if you have:
+
+use systemctl command to run it on the firewalld
+
+```
+sudo systemctl start firewalld
+sudo systemctl enable firewalld
+
+sudo firewall-cmd --permanent --add-port=53/tcp
+sudo firewall-cmd --permanent --add-port=53/udp
+
+Alternatively, you can use the predefined DNS service:
+sudo firewall-cmd --permanent --add-service=dns
+
+sudo firewall-cmd --reload
+
+sudo firewall-cmd --list-all
+```
+
+
+#### selinux 
+
+If you're using SELinux (which is enabled by default on RHEL), ensure that it's configured to allow DNS traffic:
+
+```
+sudo setsebool -P named_write_master_zones 1
+```
