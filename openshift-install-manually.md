@@ -93,7 +93,7 @@ bootstrap:
       app01.hub               IN  A       192.168.125.6
 
       ; Wildcard entry for apps subdomain
-      *.apps              IN  A       192.168.125.9
+      *.apps.hub              IN  A       192.168.125.9
 
   - path: /etc/named/zones/db.192.168.125
     content: |
