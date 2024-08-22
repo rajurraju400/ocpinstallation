@@ -296,16 +296,11 @@ rm -f openshift-client-linux-4.14.18.tar.gz
 oc completion bash > oc.bash_completion
 mv oc.bash_completion /etc/bash_completion.d/
 #
-curl https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/4.14.18/oc-mirror.tar.gz -o oc-mirror.tar.gz
-tar -xvf oc-mirror.tar.gz
-chmod u+x oc-mirror
-#
 curl https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/4.14.18/openshift-install-linux-4.14.18.tar.gz -o openshift-install-linux-4.14.18.tar.gz
 tar -xvf ./openshift-install-linux-4.14.18.tar.gz
-rm -f openshift-install-linux-4.14.18.tar.gz
+rm -f openshift-install-linux-4.14.18.tar.gz Read*
 mv openshift-install /usr/bin/
-#
-mv oc-mirror /usr/bin
+
 # 
 ```
 
