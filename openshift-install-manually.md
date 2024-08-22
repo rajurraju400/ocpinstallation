@@ -82,17 +82,16 @@ bootstrap:
           IN  NS      ns1.ocp.deployment.lab.
 
       ns1                 IN  A       192.168.125.11
-      api                 IN  A       192.168.125.9
-      api-int             IN  A       192.168.125.9
-      quay                IN  A       192.168.125.10
-      bootstrap           IN  A       192.168.125.11
-      hub01               IN  A       192.168.125.9
-      hub02               IN  A       192.168.125.8
-      hub03               IN  A       192.168.125.7
-      app01               IN  A       192.168.125.6
+      api.hub                 IN  A       192.168.125.9
+      api-int.hub             IN  A       192.168.125.9
+      quay.hub                IN  A       192.168.125.10
+      bootstrap.hub           IN  A       192.168.125.11
+      hub01.hub               IN  A       192.168.125.9
+      hub02.hub               IN  A       192.168.125.8
+      hub03.hub               IN  A       192.168.125.7
 
       ; Wildcard entry for apps subdomain
-      *.apps              IN  A       192.168.125.9
+      *.apps.hub              IN  A       192.168.125.9
 
   - path: /etc/named/zones/db.192.168.125
     content: |
@@ -106,16 +105,15 @@ bootstrap:
 
           IN  NS      ns1.ocp.deployment.lab.
 
-      9   IN  PTR     api.ocp.deployment.lab.
-      9   IN  PTR     api-int.ocp.deployment.lab.
-      9   IN  PTR     apps.ocp.deployment.lab.
+      9   IN  PTR     api.hub.ocp.deployment.lab.
+      9   IN  PTR     api-int.hub.ocp.deployment.lab.
+      9   IN  PTR     apps.hub.ocp.deployment.lab.
       10  IN  PTR     quay.ocp.deployment.lab.
       11  IN  PTR     bootstrap.ocp.deployment.lab.
-      11  IN  PTR     ns1.ocp.deployment.lab.
-      9   IN  PTR     hub01.ocp.deployment.lab.
-      8   IN  PTR     hub02.ocp.deployment.lab.
-      7   IN  PTR     hub03.ocp.deployment.lab.
-      6   IN  PTR     app01.ocp.deployment.lab.
+      11  IN  PTR     ns1.hub.ocp.deployment.lab.
+      9   IN  PTR     hub01.hub.ocp.deployment.lab.
+      8   IN  PTR     hub02.hub.ocp.deployment.lab.
+      7   IN  PTR     hub03.hub.ocp.deployment.lab.
   - path: /etc/named.conf
     content: |
       // named.conf
