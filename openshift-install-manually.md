@@ -233,7 +233,7 @@ hub:
    ip: 192.168.125.9
    mask: 255.255.255.0
    gateway: 192.168.125.1
-   EOF
+EOF
 ```
 
 list the files here 
