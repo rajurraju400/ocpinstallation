@@ -291,6 +291,7 @@ Last login: Thu Aug 22 05:17:06 2024 from 192.168.125.1
 curl https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/4.14.18/openshift-client-linux-4.14.18.tar.gz -o openshift-client-linux-4.14.18.tar.gz
 tar -xvf openshift-client-linux-4.14.18.tar.gz
 mv oc /usr/bin/
+mv kubectl /usr/bin/
 rm -f openshift-client-linux-4.14.18.tar.gz
 oc completion bash > oc.bash_completion
 mv oc.bash_completion /etc/bash_completion.d/
@@ -359,7 +360,7 @@ cat ~/.ssh/id_rsa.pub >> install-config.yaml
 now create agent-config.yaml file as below 
 
 ```
-cat << EOF >> agent-install.yaml
+cat << EOF >> agent-config.yaml
 apiVersion: v1alpha1
 metadata:
   name: hub
