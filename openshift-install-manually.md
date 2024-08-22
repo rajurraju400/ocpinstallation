@@ -48,7 +48,8 @@ root@hypervisor:~# pwd
 root@hypervisor:~# mkdir ocp -p 
 root@hypervisor:~# cd ocp
 root@hypervisor:~/ocp# 
-
+```
+```
 cat << EOF > bootstrap.yaml
 bootstrap:
   pool: default
@@ -85,13 +86,14 @@ bootstrap:
       api.hub                 IN  A       192.168.125.9
       api-int.hub             IN  A       192.168.125.9
       quay.hub                IN  A       192.168.125.10
-      bootstrap.hub           IN  A       192.168.125.11
+      bootstrap           IN  A       192.168.125.11
       hub01.hub               IN  A       192.168.125.9
       hub02.hub               IN  A       192.168.125.8
       hub03.hub               IN  A       192.168.125.7
+      app01.hub               IN  A       192.168.125.6
 
       ; Wildcard entry for apps subdomain
-      *.apps.hub              IN  A       192.168.125.9
+      *.apps              IN  A       192.168.125.9
 
   - path: /etc/named/zones/db.192.168.125
     content: |
@@ -114,6 +116,7 @@ bootstrap:
       9   IN  PTR     hub01.hub.ocp.deployment.lab.
       8   IN  PTR     hub02.hub.ocp.deployment.lab.
       7   IN  PTR     hub03.hub.ocp.deployment.lab.
+      6   IN  PTR     app01.hub.ocp.deployment.lab.
   - path: /etc/named.conf
     content: |
       // named.conf
@@ -209,7 +212,7 @@ bootstrap:
   - systemctl enable --now named
   - systemctl restart named
   - echo "search ocp.deployment.lab" >> /etc/resolv.conf
-  EOF
+EOF
 ```
 
 ```
