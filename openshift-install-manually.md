@@ -438,7 +438,7 @@ sed -i 's/^nameserver 192.168.126.1/nameserver 192.168.125.1/g' /etc/resolv.conf
 You can now go ahead and mount this ISO the the VM (called `hub`) that was created in an earlier step: 
 
 ```
-curl -d '{"Image":"http:/192.168.125.10/agent.x86_64.iso","Inserted": true}' -H "Content-Type: application/json" -X POST -k https://192.168.125.1:9000/redfish/v1/Managers/local/hub/VirtualMedia/Cd/Actions/VirtualMedia.InsertMedia
+curl -d '{"Image":"http:/192.168.125.11/agent.x86_64.iso","Inserted": true}' -H "Content-Type: application/json" -X POST -k https://192.168.125.1:9000/redfish/v1/Managers/local/hub/VirtualMedia/Cd/Actions/VirtualMedia.InsertMedia
 ```
 
 This command calls the sushy api (installed during host buildup, and listening on port 9000). 
