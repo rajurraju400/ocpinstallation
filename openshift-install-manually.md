@@ -72,7 +72,7 @@ bootstrap:
     content: Welcome to the bootstrap node, root passwd is redhat
   - path: /etc/named/zones/db.ocp.deployment.lab
     content: |
-      $TTL 86400
+      \$TTL 86400
       @   IN  SOA     ns1.ocp.deployment.lab. root.ocp.deployment.lab. (
                           2024082101 ; Serial
                           3600       ; Refresh
@@ -97,7 +97,7 @@ bootstrap:
 
   - path: /etc/named/zones/db.192.168.125
     content: |
-      $TTL 86400
+      \$TTL 86400
       @   IN  SOA     ns1.ocp.deployment.lab. root.ocp.deployment.lab. (
                           2024082101 ; Serial
                           3600       ; Refresh
