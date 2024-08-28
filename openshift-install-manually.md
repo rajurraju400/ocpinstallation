@@ -68,6 +68,101 @@ bootstrap:
     - 192.168.0.1
     search: ocp.deployment.lab
   files:
+  - path: /var/tmp/oc.sh
+    content: |
+      #!/bin/bash
+      curl https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/4.14.18/openshift-client-linux-4.14.18.tar.gz -o openshift-client-linux-4.14.18.tar.gz
+      tar -xvf openshift-client-linux-4.14.18.tar.gz
+      mv oc /usr/bin/
+      mv kubectl /usr/bin/
+      rm -f openshift-client-linux-4.14.18.tar.gz
+      oc completion bash > oc.bash_completion
+      mv oc.bash_completion /etc/bash_completion.d/
+      #
+      curl https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/4.14.18/openshift-install-linux-4.14.18.tar.gz -o openshift-install-linux-4.14.18.tar.gz
+      tar -xvf ./openshift-install-linux-4.14.18.tar.gz
+      rm -f openshift-install-linux-4.14.18.tar.gz Read*
+      mv openshift-install /usr/bin/
+
+      cat << EOF > install-config.yaml
+      apiVersion: v1
+      baseDomain: ocp.deployment.lab
+      compute:
+      - architecture: amd64
+        hyperthreading: Enabled
+        name: worker
+        replicas: 0
+      controlPlane:
+        architecture: amd64
+        hyperthreading: Enabled
+        name: master
+        replicas: 1
+      metadata:
+        creationTimestamp: null
+        name: hub
+      networking:
+        clusterNetwork:
+        - cidr: 10.128.0.0/14
+          hostPrefix: 23
+        machineNetwork:
+        - cidr: 192.168.125.0/24
+        networkType: OVNKubernetes
+        serviceNetwork:
+        - 172.30.0.0/16
+      platform:
+        none: {}
+      pullSecret: '{"auths":{"cloud.openshift.com":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfM2JlNWI4NTc5YjFkNDIxMDkwMTQxNWUzYWNkMTFlNmE6NjdMMVM5U0lEMDlRV0xCOUQwNDJFSENQVVBHNENFUUI5S0k5N1U3WjBXWlJTNUFVQzExRVlTUzZWUkFKME1FNQ==","email":"venkatapathiraj.ravichandran.ext@nokia.com"},"quay.io":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfM2JlNWI4NTc5YjFkNDIxMDkwMTQxNWUzYWNkMTFlNmE6NjdMMVM5U0lEMDlRV0xCOUQwNDJFSENQVVBHNENFUUI5S0k5N1U3WjBXWlJTNUFVQzExRVlTUzZWUkFKME1FNQ==","email":"venkatapathiraj.ravichandran.ext@nokia.com"},"registry.connect.redhat.com":{"auth":"fHVoYy1wb29sLTgwZjFmZjY2LTA5NjctNGIxMC05Y2VjLTk1M2VmOTJkZDQ4NDpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSTVObUk0TmpNeE1UWTFaR0kwTldJeE9UWTBZV1UyWVdJeE5UY3dPR1F4WmlKOS5yRkswVlI2Rk5vNkZLNF85dEFkM3dBSHpHWXZWV1Y3akhtdmVGTV84NWRPdDBqdWs0bUNMTjhSd2pZTGJfTld5ZVEzZEZhcTU4WlV3d3pELVdwRG9HY3NGQWh3Tml5OEEyUXdsY3dYdjJGUDJaaXJwOGZlbEwyTW1vOUN5MUVYa1BneW14bE9qTHRNY3Q2Yk85WlVUQTFmSHgwNV9DY3BEOFMzaE5rMDE4cks2bVdTY2ZLRGcyVkllZzQ1UDI3TnhkR2FZV2hndnpHdWVTY0MwTnJseUY2TnFERWxHa3EyREt4Wk5paHU5c2FpbzVCOE15VG9KSUZXbnFqRTNsTXl6NWFGTV9BNTgydzI2ZzE3VVI4amFNX28xTHBGbm4tcjVmOHNSV1ZjUlMzNjc5ZF9iQXZzemJJbWtfODB4Nk9qaHBOVzIzY3BXUHFlV0Y4Vm13ZzctWFN0cGp1SHNlc3lCUkZYVzFnYjh5UjFJbXFJOEZ5V0tlYUsySm5RMDN3U3RiNFRnMUxnbnQ2T0xpWUhCOHFRRFJFUVM5VTBCQVBwWmM1RFpsV1pOZWN2S2lXZzlPdW1VM2Zuc2RncVZJUHltVi1EZi1VSE5FUm82bjhYV2doZlhVWnp2TEMzV2VDY0Y1cHZBUUZMUnNBUE9sUEJuRFFNM09QRUdibkgwVXhNaEVTUXBvTGNJR1c3VGw3QWJsbDlTVTdheUtWcnd0bkNhTkk4OVpYM2tfNk11NDJFVXZMSDdVbkNUVy02YXlnUnFGeENYdGZ6Z3NsbDFZMnVKaVhzWGxPekFzUGNpWDEzbFB6V1ZueWkzbDlINmozNE51X0dRRkp0V1dkSmJsVUtIWkt3ejFHby1NQ1FXRl9FSUJzN1d3blVoeWxzaFU4cl8tUFFwc3VNc1Qwbw==","email":"venkatapathiraj.ravichandran.ext@nokia.com"},"registry.redhat.io":{"auth":"fHVoYy1wb29sLTgwZjFmZjY2LTA5NjctNGIxMC05Y2VjLTk1M2VmOTJkZDQ4NDpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSTVObUk0TmpNeE1UWTFaR0kwTldJeE9UWTBZV1UyWVdJeE5UY3dPR1F4WmlKOS5yRkswVlI2Rk5vNkZLNF85dEFkM3dBSHpHWXZWV1Y3akhtdmVGTV84NWRPdDBqdWs0bUNMTjhSd2pZTGJfTld5ZVEzZEZhcTU4WlV3d3pELVdwRG9HY3NGQWh3Tml5OEEyUXdsY3dYdjJGUDJaaXJwOGZlbEwyTW1vOUN5MUVYa1BneW14bE9qTHRNY3Q2Yk85WlVUQTFmSHgwNV9DY3BEOFMzaE5rMDE4cks2bVdTY2ZLRGcyVkllZzQ1UDI3TnhkR2FZV2hndnpHdWVTY0MwTnJseUY2TnFERWxHa3EyREt4Wk5paHU5c2FpbzVCOE15VG9KSUZXbnFqRTNsTXl6NWFGTV9BNTgydzI2ZzE3VVI4amFNX28xTHBGbm4tcjVmOHNSV1ZjUlMzNjc5ZF9iQXZzemJJbWtfODB4Nk9qaHBOVzIzY3BXUHFlV0Y4Vm13ZzctWFN0cGp1SHNlc3lCUkZYVzFnYjh5UjFJbXFJOEZ5V0tlYUsySm5RMDN3U3RiNFRnMUxnbnQ2T0xpWUhCOHFRRFJFUVM5VTBCQVBwWmM1RFpsV1pOZWN2S2lXZzlPdW1VM2Zuc2RncVZJUHltVi1EZi1VSE5FUm82bjhYV2doZlhVWnp2TEMzV2VDY0Y1cHZBUUZMUnNBUE9sUEJuRFFNM09QRUdibkgwVXhNaEVTUXBvTGNJR1c3VGw3QWJsbDlTVTdheUtWcnd0bkNhTkk4OVpYM2tfNk11NDJFVXZMSDdVbkNUVy02YXlnUnFGeENYdGZ6Z3NsbDFZMnVKaVhzWGxPekFzUGNpWDEzbFB6V1ZueWkzbDlINmozNE51X0dRRkp0V1dkSmJsVUtIWkt3ejFHby1NQ1FXRl9FSUJzN1d3blVoeWxzaFU4cl8tUFFwc3VNc1Qwbw==","email":"venkatapathiraj.ravichandran.ext@nokia.com"}}}'
+      sshKey: |
+      EOF
+
+      echo -n "  " >> install-config.yaml
+      cat ~/.ssh/id_rsa.pub >> install-config.yaml
+
+      cat << EOF >> agent-config.yaml
+      apiVersion: v1alpha1
+      metadata:
+        name: hub
+      rendezvousIP: 192.168.125.9
+      hosts:
+        - hostname: hub01
+          interfaces:
+          - name: eth0
+            macAddress: 52:54:00:35:bb:80
+          networkConfig:
+            interfaces:
+            - name: eth0
+              state: up
+              ipv4:
+                address:
+                - ip: 192.168.125.9
+                  prefix-length: 24
+                enabled: true
+                dhcp: false
+            dns-resolver:
+              config:
+                server:
+                  - 192.168.125.11
+            routes:
+              config:
+                - destination: 0.0.0.0/0
+                  next-hop-address: 192.168.125.1
+                  table-id: 254
+                  next-hop-interface: eth0
+      EOF
+
+      mkdir ~/abi 
+      cp install-config.yaml ~/abi/
+      cp agent-config.yaml ~/abi/
+      cd ~/abi
+      openshift-install agent create image --dir=./ --log-level=debug
+
+      cp agent.x86_64.iso /var/www/html/
+      systemctl enable httpd --now
+      sleep 10
+      systemctl is-active httpd
+      # should show "active"
+
+      curl -d '{"Image":"http:/192.168.125.11/agent.x86_64.iso","Inserted": true}' -H "Content-Type: application/json" -X POST -k https://192.168.125.1:9000/redfish/v1/Managers/local/hub/VirtualMedia/Cd/Actions/VirtualMedia.InsertMedia
   - path: /etc/motd
     content: Welcome to the bootstrap node, root passwd is redhat
   - path: /etc/named/zones/db.ocp.deployment.lab
