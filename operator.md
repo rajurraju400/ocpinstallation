@@ -72,7 +72,3 @@ mkdir -p clusters/{site-group-1,site-group-1/secrets/sno2,site-group-1/secrets/s
 mkdir -p policies/{site-specific-policies,resources,configuration-version-2024-03-04,configuration-version-2024-03-04/source-crs,configuration-version-2024-03-04/manifests}
 touch clusters/{site-group-1,site-group-1/secrets/sno2,site-group-1/secrets/sno3}/.gitkeep
 touch policies/{site-specific-policies,resources,configuration-version-2024-03-04,configuration-version-2024-03-04/source-crs,configuration-version-2024-03-04/manifests}/.gitkeep
-#git remote set-url origin https://rajurraju400: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@github.com/rajurraju400/ztp-repository.git
-git add --all
-git commit -m 'Initialized repo structure'
-git push origin main
