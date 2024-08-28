@@ -91,10 +91,13 @@ bootstrap:
       hub02.hub               IN  A       192.168.125.8
       hub03.hub               IN  A       192.168.125.7
       app01.hub               IN  A       192.168.125.6
+      api.sno                 IN  A       192.168.125.20
+      api-int.sno             IN  A       192.168.125.20
+      sno01.sno               IN  A       192.168.125.20
 
       ; Wildcard entry for apps subdomain
       *.apps.hub              IN  A       192.168.125.9
-
+      *.apps.hub              IN  A       192.168.125.20
   - path: /etc/named/zones/db.192.168.125
     content: |
       \$TTL 86400
@@ -117,6 +120,10 @@ bootstrap:
       8   IN  PTR     hub02.hub.ocp.deployment.lab.
       7   IN  PTR     hub03.hub.ocp.deployment.lab.
       6   IN  PTR     app01.hub.ocp.deployment.lab.
+      20   IN  PTR     api.sno.ocp.deployment.lab.
+      20   IN  PTR     api-int.sno.ocp.deployment.lab.
+      20   IN  PTR     apps.sno.ocp.deployment.lab.
+      20   IN  PTR     sno01.sno.ocp.deployment.lab.
   - path: /etc/named.conf
     content: |
       // named.conf
