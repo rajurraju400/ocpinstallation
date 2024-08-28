@@ -64,10 +64,6 @@ vdb                    252:16   0   300G  0 disk
 ZTP: 
 
 mkdir -p ~/5g-deployment-lab/
-git clone https://github.com/rajurraju400/ztp-repository.git ~/5g-deployment-lab/ztp-repository/
-git config --global user.email "rajurraju400@gmail.com"
-git config --global user.name "raj"
-cd ~/5g-deployment-lab/ztp-repository/
 mkdir -p clusters/{site-group-1,site-group-1/secrets/sno2,site-group-1/secrets/sno3,site-group-1/sno2-extra-manifest,site-group-1/sno3-extra-manifest}
 mkdir -p policies/{site-specific-policies,resources,configuration-version-2024-03-04,configuration-version-2024-03-04/source-crs,configuration-version-2024-03-04/manifests}
 touch clusters/{site-group-1,site-group-1/secrets/sno2,site-group-1/secrets/sno3}/.gitkeep
