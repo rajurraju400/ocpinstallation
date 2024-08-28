@@ -57,7 +57,7 @@ bootstrap:
   image: centos9stream
   numcpus: 2
   memory: 4096
-  nets:
+  nets
   - name: ocp-nat
     nic: eth0
     ip: 192.168.125.11
